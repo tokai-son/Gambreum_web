@@ -26,11 +26,10 @@ class BattleController < ApplicationController
     return dealer, player
   end
 
-  winnerDecision(delare, player)
+  def winnerDecision(delare, player)
   end
 
   def diceValueDicision(value)
-
   end
 
 end

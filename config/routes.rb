@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get 'top/main' => 'top#main'
 
   # battle
-  get 'uuu' => 'battle#result'
+  get 'battle/result' => 'battle#result'
 
   # Error
   get '*path', controller: 'application', action: 'render_404'
