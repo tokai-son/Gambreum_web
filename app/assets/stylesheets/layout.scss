@@ -1,0 +1,118 @@
+/* reset ================================ */
+* {
+ box-sizing: border-box;
+}
+
+
+html {
+ font: 100%/1.5 'Avenir Next', 'Hiragino Sans', sans-serif;
+ line-height: 1.7;
+ letter-spacing: 1px;
+}
+
+
+ul, li {
+ list-style-type: none;
+ padding: 0;
+ margin: 0;
+}
+
+a {
+ text-decoration: none;
+ color: #2d3133;
+ font-size: 14px;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+ margin: 0;
+}
+
+input {
+ background-color: transparent;
+ outline-width: 0;
+}
+
+form input[type="submit"] {
+ border: none;
+ cursor: pointer;
+}
+
+/*　共通 レイアウト ================================ */
+
+/*　body レイアウト ================================ */
+body {
+ margin: 0;
+ background-color: rgba(51, 133, 50, 0.89);
+ background-image: url("/images/top-background.jpg");
+}
+
+/* header レイアウト ================================ */
+header {
+ position: fixed relative;
+ padding-left: 10px;
+ width: 100%;
+ height: 50px;
+ background-color: rgb(235, 86, 86);
+ border-top: 3px solid rgb(228, 203, 33);
+ border-bottom: 4px solid rgb(228, 203, 33);
+}
+
+.header-logo p {
+ float: left;
+ position: relative;
+ top: -1px;
+ margin-left: 10px;
+ color: rgb(47, 42, 46);
+ font-size: 30px;
+ font-weight: bold;
+}
+
+.header-logo img {
+ float: left;
+ margin-top: 3px;
+ height: 40px;
+ width: 40px;
+}
+
+.header-logo img:hover {
+ transition: 1s;
+ transform: rotateZ(360deg);
+}
+
+.header-right {
+  padding: 0 5px;
+  margin-right: 5px;
+  height: 44px;
+  width: auto;
+  float: right;
+}
+
+.header-right li {
+  padding-top: 8px;
+  font-weight: bold;
+}
+
+.header-right:hover {
+  transition: 3s;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* contentsレイアウト ================================ */
+.contents {
+  height: 100vh;
+  background-color: rgba(255,255,255,0.6);
+}
+
+/* footer レイアウト ================================ */
+footer {
+ position: fixed;
+ bottom: 0;
+ padding-top: 10px;
+ text-align: center;
+ font-weight: bold;
+ height: 50px;
+ width: 100%;
+ background-color: rgb(208, 58, 37);
+ border-top: 3px solid rgb(228, 203, 33);
+ border-bottom: 3px solid rgb(228, 203, 33);
+}

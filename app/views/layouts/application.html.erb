@@ -1,15 +1,32 @@
 <!DOCTYPE html>
 <html>
-
   <head>
     <title>Gambreum</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <div class="main-header">
-      <%= link_to("TOP PAGE", "/") %>
+    <header>
+      <div class="header-logo">
+        <a href="/"><img src="/header_logo.jpg"></a>
+        <p>Gambreum</p>
+      </div>
+      <div class="header-right">
+        <ul>
+          <li><%= link_to("Metamaskログイン", "/login/metamask", {method: "post"}) %></li>
+        </ul>
+      </div>
+    </header>
+    <div class="contents">
+      <%= yield %>
     </div>
-    <%= yield %>
+    <footer>
+      <div class="footer-container">
+        <p>Created by RAjima</p>
+      </div>
+    </footer>
   </body>
 
 </html>

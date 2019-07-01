@@ -3,6 +3,9 @@ Rails.application.routes.draw do
 	get '/' => 'top#main'
   get 'top/main' => 'top#main'
 
+	# login
+	post 'login/metamask' => 'login#metamask'
+
   # battle
   get 'battle/result' => 'battle#result'
 
