@@ -1,4 +1,11 @@
 class ApplicationController < ActionController::Base
+	before_action :set_login_user
+
+	# common before action
+	def set_login_user
+		@logined_user = session[:logined]
+	end
+
 	# Error Methods
 	def render_404
   	render template: 'errors/error_404', status: 404, layout: 'application', content_type: 'text/html'

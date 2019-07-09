@@ -1,5 +1,8 @@
 {
   "name": "Gambreum_web",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "web3": "^1.0.0-beta.55"
+  },
+  "version": "1.0.0"
 }

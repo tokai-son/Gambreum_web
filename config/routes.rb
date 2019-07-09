@@ -2,9 +2,10 @@ Rails.application.routes.draw do
   # top
 	get '/' => 'top#main'
   get 'top/main' => 'top#main'
+	get 'top/warning_page' => 'top#warning_page'
 
 	# login
-	post 'login/metamask' => 'login#metamask'
+	get 'top/login' => 'top#login' # For executing js file
 
   # battle
   get 'battle/result' => 'battle#result'

@@ -88,8 +88,13 @@ header {
 }
 
 .header-right li {
-  padding-top: 8px;
   font-weight: bold;
+}
+
+.header-btn {
+  display: block;
+  padding: 10px 5px;
+  heigdht: 44px;
 }
 
 .header-right:hover {
