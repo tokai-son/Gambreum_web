@@ -5,6 +5,9 @@ class TopController < ApplicationController
   end
 
   def login
+    respond_to do |format|
+      format.js
+    end
   end
 
   def warning_page
@@ -13,7 +16,7 @@ class TopController < ApplicationController
   def check_login
     if session[:logined] == nil
       flash[:notice] = "Please Login Via Metamask !!"
-      redirect_to("/top/warning_page")
+      redirect_to("/")
     end
   end
 
