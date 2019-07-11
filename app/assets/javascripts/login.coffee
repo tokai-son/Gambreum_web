@@ -3,5 +3,3 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $(window).load ->
   console.log("window load complete")
-  web3 = new Web3(Web3.givenProvider || 'ws://localhost:8546', null, {});
-  console.log(web3)

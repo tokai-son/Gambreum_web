@@ -5,9 +5,7 @@ class TopController < ApplicationController
   end
 
   def login
-    respond_to do |format|
-      format.js
-    end
+    logger.debug("From: top_controller.rb: login controller executed !")
   end
 
   def warning_page

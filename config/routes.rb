@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 	get 'top/warning_page' => 'top#warning_page'
 
 	# login
-	get 'top/login' => 'top#login' # For executing js file
+	post 'top/login' => 'top#login' # For executing js file
 
   # battle
   get 'battle/result' => 'battle#result'
