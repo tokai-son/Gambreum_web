@@ -1,0 +1,7 @@
+I"w(function() {
+  $(window).load(function() {
+    return console.log("window load complete");
+  });
+
+}).call(this);
+:ET

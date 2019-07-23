@@ -1,3 +1,53 @@
 // Place all the styles related to the login controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.register-form {
+  height: 300px;
+  display: none;
+  border: 3px solid rgb(40, 47, 42);
+  background-color: rgba(2, 20, 10, 0.3);
+}
+
+.register-form ul {
+  font-size: 20px;
+  text-align: left;
+  font-weight: bold;
+  font-style: italic;
+  padding: 15px 0 15px 5%;
+}
+
+.register-form h3 {
+  font-size: 15px;
+  padding-bottom: 10px;
+}
+
+.register-form li {
+  font-size: 15px;
+  padding-bottom: 8px;
+}
+
+.register-form .your-wallet {
+  color: rgb(110, 20, 20);
+}
+
+.register-form input {
+  font-size: 100%;
+  background-color: rgb(235, 230, 226);
+}
+
+.register-submit {
+  float: right;
+  margin-right: 5%;
+  margin-top: 50px;
+  border-radius: 5px;
+  background-color: rgb(235, 86, 86);
+}
+
+.invisible-block {
+  width: auto;
+  height: 15px;
+}
+
+.your-wallet {
+  margin-right: 5px;
+}

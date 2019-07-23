@@ -1,8 +1,31 @@
+// link_toじゃなくて、普通にリンク書けばいいかも
 $(()=>{
-  if(typeof web3 !== 'undefined'){
-    console.log("Metamask injected !");
-    web3js = new Web3(web3.currentProvider);
-  }else{
-    console.log("Install metamask plz !");
+  if(typeof web3 !== 'undefined') {
+    web3.eth.getAccounts((error, accounts)=>{
+      if(error){
+        console.log("getAccountsでエラー発生");
+        return;
+      }
+
+      var wallet_address = accounts[0];
+      if(typeof wallet_address === 'undefined') {
+        ethereum.enable()
+        .then(function(){
+          console.log("Logine process is done !");
+          $("#button-metamask-login").html("<h3>please wailt...</h3>");
+          window.location.reload();
+        })
+        .catch(function(reason){
+          alert("無視すな！");
+        });
+
+      } else {
+        console.log("Already logined now");
+        $("#button-metamask-login").css("display", "none");
+      }
+
+    });
+  } else {
+    alert("metamaskインストールして！");
   }
 });

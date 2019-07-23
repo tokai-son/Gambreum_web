@@ -1,0 +1,21 @@
+$(()=>{
+  <% if flash[:notice] %>
+    $('.flash-place').html('<div class="flash">Input usename !!</div>');
+  <% else %>
+    $('.flash-place').html("");
+    console.log("register.js.erb");
+    var username = "<%= @username %>";
+    var abi = <%= raw(@json_data) %> ;
+    var contract_address = "0x919c3d7b71D2b42c57bDf536EA6c1337B7feD5A1";
+    var gambreumPlayer = web3.eth.contract(abi).at(contract_address);
+
+    gambreumPlayer.createPlayer(username, (error, result) =>{
+      if(error){
+        console.log(error);
+        alert("Ethが不足してたり、２重に登録していないかい？");
+        return
+      }
+      console.log(result);
+    });
+  <% end %>
+});

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
 	# login
 	post 'top/login' => 'top#login' # For executing js file
+	post 'top/register' => 'top#register' # register user on the blockchain
 
   # battle
   get 'battle/result' => 'battle#result'

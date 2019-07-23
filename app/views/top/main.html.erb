@@ -1,8 +1,107 @@
+<script type="text/javascript">
+  if(typeof web3 !== 'undefined') {
+    //　表示用にアドレス取得
+    web3.eth.getAccounts((error, accounts) => {
+      if(error) {
+        console.log("getAccountsでエラー(main.html.erb)");
+      }
+
+      if(typeof accounts[0] === 'undefined'){
+        $('.register-form').css('display', 'none');
+      } else {
+        $(".description").css("display", "none");
+        $('.your-wallet').text(accounts[0]);
+        var abi = <%= raw(@json_data) %> ;
+        var contract_address = "0x919c3d7b71D2b42c57bDf536EA6c1337B7feD5A1";
+        var gambreumPlayer = web3.eth.contract(abi).at(contract_address);
+
+        // gtip, userinfoを取得、描写する。
+        main_conclusion(gambreumPlayer, accounts)
+        .then((value) => {
+          console.log(value);
+        });
+      }
+    });
+  } else {
+    alert("metamaskインストールして！");
+  }
+
+  function getUserGtip(contract_object, accounts) {
+    return new Promise (resolve => {
+      contract_object.balanceOf(accounts[0], (error, result)=>{
+        if(error) {
+          console.log("balanceOfでエラー");
+          resolve(error);
+        }
+        user_gtip = result["c"][0];
+        resolve(result);
+      });
+    });
+  }
+
+  function viewUserInfo(contract_object) {
+    return new Promise (resolve => {
+      contract_object.viewPlayerInfo((error, result) => {
+        if(error) {
+          console.log("viewPlayerInfoでエラー");
+          resolve(error);
+        }
+        var username = result[0];
+        var winrate = result[1]["e"];
+        if(username === "") {
+          // user未登録
+          $(".user-profile").css("display", "none");
+          $(".register-form").css("display", "block")
+        } else {
+          // user情報がチェーン状にあるので、表示
+          $(".user-profile").css("display", "block");
+          $(".register-form").css("display", "none")
+          $("#username").text(username);
+          $("#winrate").text(winrate);
+          $("#GTIP").text(user_gtip);
+        }
+      resolve(result);
+      });
+    });
+  }
+
+  async function main_conclusion(contract_object, accounts) {
+    const gtip_result = await getUserGtip(contract_object, accounts);
+    const userinfo_result =  await viewUserInfo(contract_object);
+    return [gtip_result, userinfo_result];
+  }
+</script>
+
 <div class="main-container">
-  <h1>Please Login via Metamask</h1>
-  <div id="button-metamask-login">
-    <div id="metamask-login">
-      <%= link_to("Metamask Login", "/top/login", method: "post", remote: true) %>
-    </div>
+  <div class="description">
+    <h2>Welcome to Gambreum !</h2>
+    <ul>
+      <li>You can play Tintiro-game using GTIP token in Ropsten.<li>
+      <li>So you need to get a wallet address in Ropsten.</li>
+      <li>Please login and connect your wallet to our service so that create your account !<li>
+    </ul>
+  </div>
+
+  <%= link_to("Metamask Login", "/top/login", id: "button-metamask-login", method: "post", remote: true) %>
+
+  <div class="user-profile">
+    <ul>
+      <li>User Name: <span id="username"></span></li>
+      <li>Winrate: <span id="winrate"></span></li>
+      <li>GTIP: <span id="GTIP"></span></li>
+    </ul>
+  </div>
+
+  <div class="register-form">
+    <%= form_tag("/top/register", method: :post, remote: true) do %>
+      <ul>
+        <li><h3>You dont have an account.<br>Can you register your wallet below ?</h3></li>
+        <li>Your wallet is ...</li>
+        <li><span class="your-wallet"></span></li>
+        <div class="invisible-block"></div>
+        <li>Username <input type="subimt" name="username"></li>
+        <li><input type="submit" name="register-execute" value="Go!" class="register-submit"></li>
+      </ul>
+    <% end %>
   </div>
 </div>

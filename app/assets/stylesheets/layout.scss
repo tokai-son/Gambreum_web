@@ -6,6 +6,7 @@
 
 html {
  font: 100%/1.5 'Avenir Next', 'Hiragino Sans', sans-serif;
+ font-size: 62.5%;
  line-height: 1.7;
  letter-spacing: 1px;
 }
@@ -37,7 +38,17 @@ form input[type="submit"] {
  cursor: pointer;
 }
 
-/*　共通 レイアウト ================================ */
+/*　読み込み画面 レイアウト ================================ */
+
+ #loader-bg {
+   top: 0px;
+   left: 0px;
+   position: fixed;
+   background: #FFF;
+   width: 100%;
+   height: 100%;
+   z-index: 10;
+ }
 
 /*　body レイアウト ================================ */
 body {
@@ -48,10 +59,9 @@ body {
 
 /* header レイアウト ================================ */
 header {
- position: fixed relative;
- padding-left: 10px;
  width: 100%;
  height: 50px;
+ padding-left: 10px;
  background-color: rgb(235, 86, 86);
  border-top: 3px solid rgb(228, 203, 33);
  border-bottom: 4px solid rgb(228, 203, 33);
@@ -104,7 +114,10 @@ header {
 
 /* contentsレイアウト ================================ */
 .contents {
+  width: 100%;
   height: 100vh;
+  display: block;
+  position: absolute;
   background-color: rgba(255,255,255,0.6);
 }
 
@@ -120,4 +133,18 @@ footer {
  background-color: rgb(208, 58, 37);
  border-top: 3px solid rgb(228, 203, 33);
  border-bottom: 3px solid rgb(228, 203, 33);
+}
+
+/* flash レイアウト ================================ */
+.flash {
+  z-index: 3;
+  width: 100%;
+  height: 40px;
+  margin-top: 0px;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 40px;
+  text-align: center;
+  display: inline-block;
+  background-color: rgb(240, 98, 37);
 }
