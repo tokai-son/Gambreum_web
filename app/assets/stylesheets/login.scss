@@ -2,8 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .register-form {
+  width: 80%;
   height: 300px;
   display: none;
+  margin: 10px 10% 10px 10%;
   border: 3px solid rgb(40, 47, 42);
   background-color: rgba(2, 20, 10, 0.3);
 }

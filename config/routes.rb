@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 	post 'top/register' => 'top#register' # register user on the blockchain
 
   # battle
-  get 'battle/result' => 'battle#result'
+	post 'top/duel' => 'top#duel'
 
   # Error
   get '*path', controller: 'application', action: 'render_404'

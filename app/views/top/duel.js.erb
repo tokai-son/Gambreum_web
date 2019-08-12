@@ -1,0 +1,10 @@
+$(()=>{
+  console.log("duel.js.erb");
+  <% if flash[:notice] %>
+    $('.flash-place').html('<div class="flash"><%= flash[:notice] %><div>');
+  <% else %>
+    $('.flash-place').html('<div class="flash"><%= flash[:notice] %><div>');
+    console.log("ここからチンチロ結果をweb3通して、ブロックチェーンに書き込む！");
+  <% end %>
+  $("#duelForm_id").css("display", "none");
+});

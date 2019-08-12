@@ -6,16 +6,30 @@ $(()=>{
     console.log("register.js.erb");
     var username = "<%= @username %>";
     var abi = <%= raw(@json_data) %> ;
-    var contract_address = "0x919c3d7b71D2b42c57bDf536EA6c1337B7feD5A1";
+    var contract_address = "0x61C55c93B3AcA43285ED8c3A4DDFDF0CEa0d6a46";
     var gambreumPlayer = web3.eth.contract(abi).at(contract_address);
 
-    gambreumPlayer.createPlayer(username, (error, result) =>{
+    gambreumPlayer.createPlayer(username, (error, transaction_hash) =>{
       if(error){
         console.log(error);
-        alert("Ethが不足してたり、２重に登録していないかい？");
-        return
+        alert("Ethが不足しています…もしくは、書き込みがpendingなので少し時間を置いてからアクセスしてください。");
+        return;
       }
-      console.log(result);
+      alert("ユーザ情報をブロックチェーンへ書き込みました！\n反映されるまで、時間がかかります。\nTransaction Hash: " + transaction_hash);
+      console.log(transaction_hash); // <- transaction hash
+      var count = 0;
+      var waitForComfirmingTransaction = function() {
+        var id = setTimeout(waitForComfirmingTransaction, 1000);
+        web3.eth.getTransaction(transaction_hash, (error, result) => {
+          if(result["blockNumber"] != null){
+            $('#register-status').text("登録完了！ページを更新してください。");
+            clearTimeout(id);
+          } else {
+            $('#register-status').text("ブロックチェーンに書き込み中...");
+          }
+        });
+      }
+      waitForComfirmingTransaction(transaction_hash);
     });
   <% end %>
 });

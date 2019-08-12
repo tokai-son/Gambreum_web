@@ -1,31 +1,56 @@
 <script type="text/javascript">
-  if(typeof web3 !== 'undefined') {
-    //　表示用にアドレス取得
-    web3.eth.getAccounts((error, accounts) => {
-      if(error) {
-        console.log("getAccountsでエラー(main.html.erb)");
-      }
+  // Grobal
+  var dice1;
+  var dice2;
+  var dice3;
+  var dice4;
+  var dice5;
+  var dice6;
+  var rolling_dice_id;
 
-      if(typeof accounts[0] === 'undefined'){
-        $('.register-form').css('display', 'none');
-      } else {
-        $(".description").css("display", "none");
-        $('.your-wallet').text(accounts[0]);
-        var abi = <%= raw(@json_data) %> ;
-        var contract_address = "0x919c3d7b71D2b42c57bDf536EA6c1337B7feD5A1";
-        var gambreumPlayer = web3.eth.contract(abi).at(contract_address);
+  $(document).on('click', '#duel-buttun', ()=>{
+    clearInterval(rolling_dice_id);
+    var form = document.forms.duelForm;
+    form.dice1Val.value = dice1;
+    form.dice2Val.value = dice2;
+    form.dice3Val.value = dice3;
+    form.dice4Val.value = dice4;
+    form.dice5Val.value = dice5;
+    form.dice6Val.value = dice6;
+  });
 
-        // gtip, userinfoを取得、描写する。
-        main_conclusion(gambreumPlayer, accounts)
-        .then((value) => {
-          console.log(value);
-        });
-      }
-    });
-  } else {
-    alert("metamaskインストールして！");
-  }
+  $(document).ready(()=>{
+    if(typeof web3 !== 'undefined') {
+      //　表示用にアドレス取得
+      web3.eth.getAccounts((error, accounts) => {
+        if(error) {
+          console.log("getAccountsでエラー(main.html.erb)");
+        }
 
+        if(typeof accounts[0] === 'undefined'){
+          $('.register-form').css('display', 'none');
+        } else {
+          $(".description").css("display", "none");
+          $('.your-wallet').text(accounts[0]);
+          var abi = <%= raw(@json_data) %> ;
+          var contract_address = "0x61C55c93B3AcA43285ED8c3A4DDFDF0CEa0d6a46";
+          var gambreumPlayer = web3.eth.contract(abi).at(contract_address);
+
+          // gtip, userinfoを取得、描写する。
+          main_conclusion(gambreumPlayer, accounts)
+          //ここをもっと細分化して書くべきかも
+          //値を取得し、then描写・・・値を取得し、then描画・・・みたいな感じ
+          .then((value) => {
+            rolling_dice_id = setInterval(viewRollingDice, 100);
+          });
+        }
+      });
+    } else {
+      alert("metamaskインストールして！");
+    }
+  });
+
+  // functions to connect Gambreum contract
   function getUserGtip(contract_object, accounts) {
     return new Promise (resolve => {
       contract_object.balanceOf(accounts[0], (error, result)=>{
@@ -51,10 +76,12 @@
         if(username === "") {
           // user未登録
           $(".user-profile").css("display", "none");
+          $(".game-window").css("display", "none");
           $(".register-form").css("display", "block")
         } else {
           // user情報がチェーン状にあるので、表示
           $(".user-profile").css("display", "block");
+          $(".game-window").css("display", "block");
           $(".register-form").css("display", "none")
           $("#username").text(username);
           $("#winrate").text(winrate);
@@ -65,13 +92,44 @@
     });
   }
 
+
   async function main_conclusion(contract_object, accounts) {
     const gtip_result = await getUserGtip(contract_object, accounts);
     const userinfo_result =  await viewUserInfo(contract_object);
     return [gtip_result, userinfo_result];
   }
+
+  // functions to view dice
+  function viewRollingDice() {
+    var diceChange = function(dice_number) {
+      var random = Math.random() * 6;
+      var random_1to6 = Math.floor(random) + 1;
+      if(dice_number === 1){
+        document.dice1.src = "/images/d" + random_1to6 + ".png";
+      } else if (dice_number === 2) {
+        document.dice2.src = "/images/d" + random_1to6 + ".png";
+      } else if (dice_number === 3) {
+        document.dice3.src = "/images/d" + random_1to6 + ".png";
+      } else if (dice_number === 4) {
+        document.dice4.src = "/images/d" + random_1to6 + ".png";
+      } else if (dice_number === 5) {
+        document.dice5.src = "/images/d" + random_1to6 + ".png";
+      } else if (dice_number === 6) {
+        document.dice6.src = "/images/d" + random_1to6 + ".png";
+      }
+      return random_1to6;
+    };
+    dice1 = diceChange(1);
+    dice2 = diceChange(2);
+    dice3 = diceChange(3);
+    dice4 = diceChange(4);
+    dice5 = diceChange(5);
+    dice6 = diceChange(6);
+  }
 </script>
 
+
+<!-- HTML DOC -->
 <div class="main-container">
   <div class="description">
     <h2>Welcome to Gambreum !</h2>
@@ -92,6 +150,38 @@
     </ul>
   </div>
 
+  <div class="game-window">
+    <div class="dice-wrapper">
+      <!-- Player Dices -->
+      <div class="duel_tag">
+        YOU
+      </div>
+      <img src="/images/d1.png" name="dice1" class="rolling-dice">
+      <img src="/images/d1.png" name="dice2" class="rolling-dice">
+      <img src="/images/d1.png" name="dice3" class="rolling-dice">
+    </div>
+
+    <!-- Dealer Dices -->
+    <div class="duel_tag">
+      Dealer
+    </div>
+    <img src="/images/d1.png" name="dice4" class="rolling-dice">
+    <img src="/images/d1.png" name="dice5" class="rolling-dice">
+    <img src="/images/d1.png" name="dice6" class="rolling-dice">
+
+    <!-- Duel Button -->
+    <%= form_tag("/top/duel", name: "duelForm", id: "duelForm_id", method: :post, remote: true) do %>
+      <input type="text" name="givenTip" id="give-tip-buttun" value="0">
+      <input type="text" name="dice1Val" style="display:none" value="-1">
+      <input type="text" name="dice2Val" style="display:none" value="-1">
+      <input type="text" name="dice3Val" style="display:none" value="-1">
+      <input type="text" name="dice4Val" style="display:none" value="-1">
+      <input type="text" name="dice5Val" style="display:none" value="-1">
+      <input type="text" name="dice6Val" style="display:none" value="-1">
+      <input type="submit" name="duel" id="duel-buttun" value="DUEL!">
+    <% end %>
+  </div>
+
   <div class="register-form">
     <%= form_tag("/top/register", method: :post, remote: true) do %>
       <ul>
@@ -99,8 +189,9 @@
         <li>Your wallet is ...</li>
         <li><span class="your-wallet"></span></li>
         <div class="invisible-block"></div>
-        <li>Username <input type="subimt" name="username"></li>
+        <li>Username <input type="text" name="username"></li>
         <li><input type="submit" name="register-execute" value="Go!" class="register-submit"></li>
+        <li><span id="register-status"></span></li>
       </ul>
     <% end %>
   </div>

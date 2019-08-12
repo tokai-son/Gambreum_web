@@ -66,3 +66,76 @@
   font-style: italic;
   padding: 15px 0 15px 5%;
 }
+
+// game-window
+.game-window {
+  width: 80%;
+  height: 350px;
+  display: none;
+  position: relative;
+  margin: 10px 10% 10px 10%;
+  border: 3px solid rgb(40, 47, 42);
+  background-color: rgba(2, 20, 10, 0.3);
+}
+
+.dice-wrapper {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.rolling-dice {
+  width: 70px;
+  height: 70px;
+  margin-right: 10px;
+  display: inline-block;
+}
+
+#duelForm_id {
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#give-tip-buttun {
+  font-size: 20px;
+  margin-right: 10px;
+  background-color: white;
+}
+
+#duel-buttun {
+  font-size: 20px;
+  background-color: white;
+}
+
+.duel_tag {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+// tablet
+@media (max-width: 1000px) {
+  .game-window {
+    height: 250px;
+  }
+  .rolling-dice {
+    width: 40px;
+    height: 40px;
+  }
+
+  #duelForm_id{
+    margin-top: 25px;
+  }
+
+  #give-tip-buttun {
+    font-size: 10px;
+  }
+
+  #duel-buttun {
+    font-size: 10px;
+  }
+}
+
+// phone
+@media (max-width: 500px) {
+
+}

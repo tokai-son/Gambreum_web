@@ -37,4 +37,13 @@ class TopController < ApplicationController
     end
   end
 
+  def duel
+    @givenTip = params[:givenTip]
+    if(@givenTip.to_i <= 0)
+      flash[:notice] = "1GTIPもかけんとは舐めとんのか!! ページを更新せいー。"
+    else
+      flash[:notice] = "決着！"
+    end
+  end
+
 end
