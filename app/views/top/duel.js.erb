@@ -1,10 +1,17 @@
 $(()=>{
   console.log("duel.js.erb");
-  <% if flash[:notice] %>
-    $('.flash-place').html('<div class="flash"><%= flash[:notice] %><div>');
-  <% else %>
-    $('.flash-place').html('<div class="flash"><%= flash[:notice] %><div>');
-    console.log("ここからチンチロ結果をweb3通して、ブロックチェーンに書き込む！");
-  <% end %>
+  var abi = <%= raw(@json_data) %> ;
+  var reward = <%= @reward %> ;
+
+  $('.flash-place').html('<div class="flash"><%= flash[:notice] %><div>');
+  if(reward >= 0) { // 決着
+    console.log("決着が付いている。ここから下にTransactionのIDを載せる");
+    $("#transaction_link_btn").html('<a href="https://ropsten.etherscan.io/tx/<%= @transaction_hash %>" target="_blank">トランザクションを見る</a>');
+    alert("下に表示されるTransactionが承認されるまで待ってね!");
+  } else if (reward == -1) { // チップがマイナスとか、持っている以上にかけてる場合
+    console.log("チップの掛け方がおかしい場合");
+  } else if (reward == -2) { // 引き分け
+    console.log("引き分け");
+  }
   $("#duelForm_id").css("display", "none");
 });

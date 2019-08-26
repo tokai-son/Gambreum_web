@@ -7,6 +7,8 @@
   var dice5;
   var dice6;
   var rolling_dice_id;
+  var user_gtip = -1;
+  var user_wallet =  -1;
 
   $(document).on('click', '#duel-buttun', ()=>{
     clearInterval(rolling_dice_id);
@@ -17,6 +19,8 @@
     form.dice4Val.value = dice4;
     form.dice5Val.value = dice5;
     form.dice6Val.value = dice6;
+    form.user_gtip.value = user_gtip;
+    form.user_wallet.value = user_wallet;
   });
 
   $(document).ready(()=>{
@@ -32,8 +36,9 @@
         } else {
           $(".description").css("display", "none");
           $('.your-wallet').text(accounts[0]);
+          user_wallet = accounts[0];
           var abi = <%= raw(@json_data) %> ;
-          var contract_address = "0x61C55c93B3AcA43285ED8c3A4DDFDF0CEa0d6a46";
+          var contract_address = "0x0B19Fd715171484E658e61a61b2891772d89b099";
           var gambreumPlayer = web3.eth.contract(abi).at(contract_address);
 
           // gtip, userinfoを取得、描写する。
@@ -73,6 +78,7 @@
         }
         var username = result[0];
         var winrate = result[1]["e"];
+        console.log("username" + username)
         if(username === "") {
           // user未登録
           $(".user-profile").css("display", "none");
@@ -145,7 +151,6 @@
   <div class="user-profile">
     <ul>
       <li>User Name: <span id="username"></span></li>
-      <li>Winrate: <span id="winrate"></span></li>
       <li>GTIP: <span id="GTIP"></span></li>
     </ul>
   </div>
@@ -178,8 +183,14 @@
       <input type="text" name="dice4Val" style="display:none" value="-1">
       <input type="text" name="dice5Val" style="display:none" value="-1">
       <input type="text" name="dice6Val" style="display:none" value="-1">
+      <input type="text" name="user_gtip" style="display:none" value="-1">
+      <input type="text" name="user_wallet" style="display:none" value="-1">
       <input type="submit" name="duel" id="duel-buttun" value="DUEL!">
     <% end %>
+    <!-- Link to Transaction -->
+    <div class="transaction_link">
+      <span id="transaction_link_btn"><div>
+    </div>
   </div>
 
   <div class="register-form">

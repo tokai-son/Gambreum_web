@@ -62,6 +62,9 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # User added gems below
+gem "eth"
 gem "gon"
+gem 'digest-sha3'
+gem 'ethereum.rb'
 gem 'jquery-rails'
 gem 'jquery-turbolinks'

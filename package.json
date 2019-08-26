@@ -2,7 +2,9 @@
   "name": "Gambreum_web",
   "private": true,
   "dependencies": {
-    "web3": "^1.0.0-beta.55"
+    "@openzeppelin/contracts": "^2.3.0",
+    "web3": "^1.0.0-beta.55",
+    "zeppelin-solidity": "^1.12.0"
   },
   "version": "1.0.0"
 }

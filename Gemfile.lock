@@ -74,9 +74,22 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.5)
     crass (1.0.4)
+    digest-sha3 (1.1.0)
     erubi (1.8.0)
+    eth (0.4.10)
+      digest-sha3 (~> 1.1)
+      ffi (~> 1.0)
+      money-tree (~> 0.10.0)
+      rlp (~> 0.7.3)
+      scrypt (~> 3.0.6)
+    ethereum.rb (2.2)
+      activesupport (>= 4.0)
+      digest-sha3 (~> 1.1)
     execjs (2.7.0)
     ffi (1.11.1)
+    ffi-compiler (1.0.1)
+      ffi (>= 1.0.0)
+      rake
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     gon (6.2.1)
@@ -111,6 +124,8 @@ GEM
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
     minitest (5.11.3)
+    money-tree (0.10.0)
+      ffi
     msgpack (1.3.0)
     multi_json (1.13.1)
     nio4r (2.4.0)
@@ -152,6 +167,7 @@ GEM
     regexp_parser (1.5.1)
     request_store (1.4.1)
       rack (>= 1.4)
+    rlp (0.7.3)
     ruby_dep (1.5.0)
     rubyzip (1.2.3)
     sass (3.7.4)
@@ -165,6 +181,8 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+    scrypt (3.0.6)
+      ffi-compiler (>= 1.0, < 2.0)
     selenium-webdriver (3.142.3)
       childprocess (>= 0.5, < 2.0)
       rubyzip (~> 1.2, >= 1.2.2)
@@ -211,6 +229,9 @@ DEPENDENCIES
   capybara (>= 2.15)
   chromedriver-helper
   coffee-rails (~> 4.2)
+  digest-sha3
+  eth
+  ethereum.rb
   gon
   jbuilder (~> 2.5)
   jquery-rails

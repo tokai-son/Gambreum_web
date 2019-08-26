@@ -6,7 +6,7 @@ $(()=>{
     console.log("register.js.erb");
     var username = "<%= @username %>";
     var abi = <%= raw(@json_data) %> ;
-    var contract_address = "0x61C55c93B3AcA43285ED8c3A4DDFDF0CEa0d6a46";
+    var contract_address = "0x0B19Fd715171484E658e61a61b2891772d89b099";
     var gambreumPlayer = web3.eth.contract(abi).at(contract_address);
 
     gambreumPlayer.createPlayer(username, (error, transaction_hash) =>{
