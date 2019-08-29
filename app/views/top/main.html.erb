@@ -79,7 +79,7 @@
         var username = result[0];
         var winrate = result[1]["e"];
         console.log("username" + username)
-        if(username === "") {
+        if(username == "") {
           // user未登録
           $(".user-profile").css("display", "none");
           $(".game-window").css("display", "none");
@@ -189,7 +189,7 @@
     <% end %>
     <!-- Link to Transaction -->
     <div class="transaction_link">
-      <span id="transaction_link_btn"><div>
+      <span id="transaction_link_btn">
     </div>
   </div>
 
